@@ -28,13 +28,16 @@ from webob.dec import wsgify
 from paste.request import path_info_pop
 
 class Delegator(object):
-    def __init__(self, subapps):
+    def __init__(self, subapps, default = None):
         self._subapps = subapps
+        self._defapp = default
 
     @wsgify
     def __call__(self, req):
         app = self._subapps.get(path_info_pop(req.environ))
         if app:
             return app
+        elif self._defapp:
+            return self._defapp
         else:
             raise exc.HTTPNotFound('invalid request')
