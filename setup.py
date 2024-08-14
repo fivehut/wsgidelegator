@@ -18,7 +18,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         ],
     install_requires = [
-        'WebOb == 1.0',
+        'WebOb == 1.8.8',
         'Paste >= 1.7.5.1',
         ],
     )
